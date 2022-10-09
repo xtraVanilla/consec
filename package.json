@@ -1,0 +1,19 @@
+{
+  "name": "@xvanilla/consec",
+  "version": "0.0.4",
+  "description": "",
+  "main": "wasm_exec.js",
+  "scripts": {
+    "compile:ts": "tsc",
+    "compile:go": "tinygo build -target wasm -o main.wasm && npm run gen:go",
+    "gen:go": "cp \"$(tinygo env TINYGOROOT)/targets/wasm_exec.js\" .",
+    "test:wasm": "node wasm_exec.js main.wasm",
+    "test:js": "node dist/run.js",
+    "pub": "npm publish -access=public"
+  },
+  "author": "Ashton Morris",
+  "license": "MIT",
+  "dependencies": {
+    "shelljs": "^0.8.5"
+  }
+}
