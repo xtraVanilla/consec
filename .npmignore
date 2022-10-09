@@ -1,1 +1,7 @@
 node_modules
+webserver
+main.go
+main
+.vscode
+static/index.html
+static/index.js

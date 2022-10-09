@@ -8,7 +8,7 @@ import (
 
 type Func struct {
 	Name string
-	Args []string
+	Args []interface{}
 }
 
 type FunctionList []Func
@@ -18,8 +18,15 @@ type Result struct {
 	Name string
 }
 
-func callFunc(name string) string {
-	res := js.Global().Call(name).String()
+func callFunc(name string, args []interface{}) string {
+	ch := make(chan string)
+
+	go func() {
+		ch <- js.Global().Call(name, args...).String()
+	}()
+
+	res := <-ch
+
 	return res
 }
 
@@ -27,21 +34,28 @@ func callAllFuncs(funcs FunctionList) []interface{} {
 	var results []interface{}
 
 	for _, s := range funcs {
-		res := callFunc(s.Name)
+		res := callFunc(s.Name, s.Args)
 		results = append(results, res)
 	}
 
 	return results
 }
 
-func consec(this js.Value, args []js.Value) interface{} {
+func JSON2FunctionList(args []js.Value) FunctionList {
 	a := args[0].String()
+
 	var funcs FunctionList
+
 	err := json.Unmarshal([]byte(a), &funcs)
 	if err != nil {
 		fmt.Println(err.Error())
 	}
 
+	return funcs
+}
+
+func consec(this js.Value, args []js.Value) interface{} {
+	funcs := JSON2FunctionList(args)
 	return callAllFuncs(funcs)
 }
 

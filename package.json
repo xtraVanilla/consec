@@ -1,19 +1,15 @@
 {
   "name": "@xvanilla/consec",
-  "version": "0.0.4",
-  "description": "",
+  "version": "0.0.5",
+  "description": "Exposes a custom consec function from GO to JavaScript.",
   "main": "wasm_exec.js",
   "scripts": {
-    "compile:ts": "tsc",
-    "compile:go": "tinygo build -target wasm -o main.wasm && npm run gen:go",
-    "gen:go": "cp \"$(tinygo env TINYGOROOT)/targets/wasm_exec.js\" .",
+    "compile:go": "GOOS=js GOARCH=wasm go build -o static/main.wasm",
+    "gen:go": "cp \"$(go env GOROOT)/misc/wasm/wasm_exec.js\" ./static",
     "test:wasm": "node wasm_exec.js main.wasm",
     "test:js": "node dist/run.js",
     "pub": "npm publish -access=public"
   },
   "author": "Ashton Morris",
-  "license": "MIT",
-  "dependencies": {
-    "shelljs": "^0.8.5"
-  }
+  "license": "MIT"
 }
