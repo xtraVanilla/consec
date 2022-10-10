@@ -11,6 +11,7 @@ npm i -S @xvanilla/consec
 
 ```
 import "@xvanilla/consec/static/wasm_exec";
+import "@xvanilla/consec/static/instantiate";
 
 function goodbye() {
   return "bye dude!";
@@ -33,5 +34,5 @@ const funcs = [
   
 const res = consec(JSON.stringify(funcs));
 
-console.log(res); // 
+console.log(res); // ['bye dude!', 'cool', '<number: 3>']
 ```
