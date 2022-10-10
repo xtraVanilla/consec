@@ -49,7 +49,7 @@ function runJS() {
 
 function runGolang() {
   const funcs = [
-    { name: "get3" },
+    { name: "goodbye" },
     { name: "cool" },
     { name: "add", args: [1, 2] },
   ];

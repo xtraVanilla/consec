@@ -1,15 +1,19 @@
 {
   "name": "@xvanilla/consec",
-  "version": "0.0.5",
+  "version": "0.0.8",
   "description": "Exposes a custom consec function from GO to JavaScript.",
-  "main": "wasm_exec.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "compile:go": "GOOS=js GOARCH=wasm go build -o static/main.wasm",
-    "gen:go": "cp \"$(go env GOROOT)/misc/wasm/wasm_exec.js\" ./static",
-    "test:wasm": "node wasm_exec.js main.wasm",
-    "test:js": "node dist/run.js",
+    "gen:go": "cp \"$(go env GOROOT)/misc/wasm/wasm_exec_node.js\" ./static",
+    "test:wasm": "node static/wasm_exec_node.js static/main.wasm add 1 2",
     "pub": "npm publish -access=public"
   },
   "author": "Ashton Morris",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xtraVanilla/consec"
+  }
 }
