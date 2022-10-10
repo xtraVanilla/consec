@@ -7,15 +7,11 @@ This package exposes a Go function called *consec*. It calls *n* number of JavaS
 npm i -S @xvanilla/consec
 ```
 
-Copy and paste the following into your index.html:
-
-```
-import "@xvanilla/consec/static/wasm_exec"
-```
-
 ### Usage
 
 ```
+import { consec } from "@xvanilla/consec";
+
 function goodbye() {
   return "bye dude!";
 }
