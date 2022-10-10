@@ -10,7 +10,7 @@ npm i -S @xvanilla/consec
 ### Usage
 
 ```
-import { consec } from "@xvanilla/consec";
+import "@xvanilla/consec/static/wasm_exec";
 
 function goodbye() {
   return "bye dude!";
